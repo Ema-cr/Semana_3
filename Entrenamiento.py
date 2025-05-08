@@ -46,52 +46,28 @@ def añadir_producto ():
         print(f"{producto['cantidad']} unidades de {producto['nombre']} a ${producto['precio']:.2f} cada un/a")
 #----------------------------------------------------------------------------------------------------------------------------
 
-def buscar_prod (nombre_prod, lista_compras): 
+def buscar_prod (nombre_a_buscar,lista_compras): 
     for producto in lista_compras:
-        if producto["nombre"].lower() == nombre_prod.lower():
-            return producto["nombre"], producto["precio"], producto["cantidad"],
-    return None
-
-while True:
-    nombre_a_buscar = input("Ingresa el nombre del producto que deseas buscar: ").strip()
-    resultado = buscar_prod(nombre_a_buscar,lista_compras)
-
-    if resultado:
-        print(f"Producto encontrado: {resultado[0]} precio ${resultado[1]:.2f}, cantidad {resultado[2]}")
-        break
-    else:
-        print("Producto no encontrado. ")
-
+        if producto["nombre"].lower() == nombre_a_buscar.lower():
+            return producto
 #---------------------------------------------------------------------------------------------------------
-def actualizar_precio(lista_compras, nombre_a_buscar, nuevo_precio): #Cambiar los datos adentro de la lista(dicc)
+def actualizar_precio(nombre_a_buscar, nuevo_precio): #Cambiar los datos adentro de la lista(dicc)
     for producto in lista_compras:
         if producto["nombre"].lower() == nombre_a_buscar.lower():
             producto["precio"] = nuevo_precio
-            return True
-        return False
-
-while True:
-    try:
-        nuevo_precio = float(input(f"Ingrese el nuevo precio para '{nombre_a_buscar}': "))
-        if nuevo_precio > 0:
-            break
+            print("Precio actualizado correctamente. ")
         else:
-            print("El precio debe ser mayor a cero. ")
-    except ValueError:
-        print("Ingresa un número válido. ")
+            print("No se pudo actualizar el precio. Producto no encontrado.")
 
-if actualizar_precio(lista_compras, nombre_a_buscar, nuevo_precio):
-    print("Precio actualizado correctamente. ")
-else:
-    print("No se pudo actualizar el precio. Producto no encontrado.")
 #--------------------------------------------------------------------------------------------------
 
-def eliminar_producto(nombre, lista_compras):
+def eliminar_producto(nombre):
     for i, producto in enumerate(lista_compras):
         if producto["nombre"].lower() == nombre.lower():
             lista_compras.pop(i)
-            return True
-        return False
+            print("Se ha eliminado con exito el producto. ")
+        else:
+            print("No se ha encontrado el producto. ")    
 #--------------------------------------------------------------------------------------------------       
 def mostrar_total():
     return sum(map(lambda producto: producto.get("precio",0) * producto.get("cantidad", 1),lista_compras))
@@ -99,35 +75,54 @@ def mostrar_total():
 
 
 def Menu():
-    print ("""Bienvenido a la Tienda Riwi,Ingresa la opcion que deseas!:
-    -----------------------Menu Principal---------------------------
-    1.Añadir producto." 
-    2.Consultar productos.
-    3.Actualizar precio.
-    4.Eliminar productos.
-    5.Ver el Valor Total.
-    6.Salir. 
-""")
+    while True:
+        print ("""Bienvenido a la Tienda Riwi,Ingresa la opcion que deseas!:
+        -----------------------Menu Principal---------------------------
+        1.Añadir producto." 
+        2.Consultar productos.
+        3.Actualizar precio.
+        4.Eliminar productos.
+        5.Ver el Valor Total.
+        0.Salir. 
+    """)
     
-while True:
-    Menu()
-    opcion =0
-    try:
+
         opcion = input("Selecciona una opcion. ")
-        if opcion == 1:
+        if opcion == "1":
             añadir_producto()
-        elif opcion == 2:
+            
+            
+        elif opcion == "2":
+            nombre_a_buscar = input("Ingresa el nombre del producto que deseas buscar: ").strip()
+            resultado = buscar_prod(nombre_a_buscar,lista_compras)
+
+            if resultado:
+                print(f"El nombre del producto es {resultado['nombre']} hay {resultado['cantidad']} unidades a este precio ${resultado['precio']:.2f} ")
+                break
+            else:
+                print("Producto no encontrado. ")
             buscar_prod()
-        elif opcion == 3:
-            actualizar_precio()
-        elif opcion == 4:
-            eliminar_producto()
-        elif opcion == 5:
+            
+        elif opcion == "3":
+            nombre_a_buscar=input("Ingresa el nombre del producto que deseas buscar: ").strip()
+            nuevo_precio = float(input(f"Ingrese el nuevo precio para '{nombre_a_buscar}': "))
+            if nuevo_precio < 0:
+                print("El precio debe ser mayor a cero. ")
+            else:
+                actualizar_precio(nombre_a_buscar,nuevo_precio) 
+                    
+        elif opcion == "4":
+            nombre=input("Ingresa el nombre del producto que deseas eliminar: ").strip()
+            eliminar_producto(nombre)
+
+        elif opcion == "5":
             total_sumas = mostrar_total()
             print(f"La suma de todos los productos es: {total_sumas}")
-        elif opcion == 6:
+            
+        elif opcion == "0":
             print("Gracias por preferirnos. ")
+            break
         else:
             print("Opción no valida,por favor elige una opcion del menú.  ")
-    except ValueError:
-        print("Por favor ingresa una opción valida. ")
+
+Menu()

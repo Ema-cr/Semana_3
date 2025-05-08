@@ -45,7 +45,6 @@ def añadir_producto ():
     for producto in lista_compras:
         print(f"{producto['cantidad']} unidades de {producto['nombre']} a ${producto['precio']:.2f} cada un/a")
 #----------------------------------------------------------------------------------------------------------------------------
-añadir_producto()
 
 def buscar_prod (nombre_prod, lista_compras): 
     for producto in lista_compras:
@@ -69,7 +68,7 @@ def actualizar_precio(lista_compras, nombre_a_buscar, nuevo_precio): #Cambiar lo
         if producto["nombre"].lower() == nombre_a_buscar.lower():
             producto["precio"] = nuevo_precio
             return True
-    return False
+        return False
 
 while True:
     try:
@@ -93,10 +92,9 @@ def eliminar_producto(nombre, lista_compras):
             lista_compras.pop(i)
             return True
         return False
-            
-def mostrar_total
-
-    # ACA una funcion LMBDA para calcular el valor total del inventario
+#--------------------------------------------------------------------------------------------------       
+def mostrar_total():
+    return sum(map(lambda producto: producto.get("precio",0) * producto.get("cantidad", 1),lista_compras))
 
 
 
@@ -107,17 +105,29 @@ def Menu():
     2.Consultar productos.
     3.Actualizar precio.
     4.Eliminar productos.
-    5.Ver el Valor Total.""") 
+    5.Ver el Valor Total.
+    6.Salir. 
+""")
+    
 while True:
     Menu()
-    opcion = input("Selecciona una opcion. ")
-    if opcion == 1:
-        añadir_producto()
-    elif opcion == 2:
-        buscar_prod()
-    elif opcion == 3:
-        actualizar_precio()
-    elif opcion == 4:
-        eliminar_prod()
-    #else
-        #funcion lambda      ****#EN CONSTRUCCION****
+    opcion =0
+    try:
+        opcion = input("Selecciona una opcion. ")
+        if opcion == 1:
+            añadir_producto()
+        elif opcion == 2:
+            buscar_prod()
+        elif opcion == 3:
+            actualizar_precio()
+        elif opcion == 4:
+            eliminar_producto()
+        elif opcion == 5:
+            total_sumas = mostrar_total()
+            print(f"La suma de todos los productos es: {total_sumas}")
+        elif opcion == 6:
+            print("Gracias por preferirnos. ")
+        else:
+            print("Opción no valida,por favor elige una opcion del menú.  ")
+    except ValueError:
+        print("Por favor ingresa una opción valida. ")

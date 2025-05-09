@@ -34,7 +34,7 @@ Permite al usuario eliminar un producto de la lista de compras proporcionado el 
 
 Muestra el valor total de la compra, sumando el precio de todos los productos multiplicado por su respectiva cantidad.
 
-### 6. **Salir**
+### 0. **Salir**
 
 Permite al usuario salir del programa y finalizar la ejecución.
 
@@ -54,13 +54,7 @@ Este programa está escrito en Python 3. Asegúrate de tener Python 3.x instalad
 
 2. Abre una terminal o consola y navega hasta la carpeta donde se encuentra el archivo `tienda.py`.
 
-3. Ejecuta el script con el siguiente comando:
-
-   ```bash
-   python tiendariwi.py
-   ```
-
-4. Una vez que se ejecute el programa, aparecerá un menú con varias opciones. El usuario puede interactuar con el programa eligiendo las opciones del menú.
+3. Una vez que se ejecute el programa, aparecerá un menú con varias opciones. El usuario puede interactuar con el programa eligiendo las opciones del menú.
 
 ---
 
@@ -131,11 +125,3 @@ La suma de todos los productos es: $25.00
 Si deseas mejorar este proyecto o agregar nuevas funcionalidades, ¡siéntete libre de crear un pull request!
 
 ---
-
-## Licencia
-
-Este proyecto está licenciado bajo la licencia MIT - mira el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-¡Espero que este README sea lo que necesitas! Si hay algún detalle que quieras agregar o cambiar, ¡dímelo!

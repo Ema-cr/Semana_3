@@ -1,7 +1,3 @@
-¡Por supuesto! Aquí tienes un ejemplo de un archivo README para este código:
-
----
-
 # Tienda Riwi - Gestión de Productos
 
 Este programa permite gestionar una lista de compras en una tienda virtual. Los usuarios pueden añadir productos, consultar la lista de productos, actualizar precios, eliminar productos y calcular el valor total de la compra.
